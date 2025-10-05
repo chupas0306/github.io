@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алгоритм Успеха - Разработка и модернизация АСУ ТП</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Базовые стили */
+        :root {
+            --primary: #1a3a6c;
+            --secondary: #2c5282;
+            --accent: #38b2ac;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --gray: #718096;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* Мобильное меню */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: white;
+            margin-bottom: 4px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        /* Главный баннер */
+        .hero {
+            background: linear-gradient(rgba(26, 58, 108, 0.85), rgba(26, 58, 108, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a3a6c"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%232c5282" stroke-width="1"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin: 0 auto 2.5rem;
+            max-width: 90%;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #2c9c97;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-large {
+            padding: 1rem 2.2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Секции */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        /* Услуги */
+        .services {
+            background-color: var(--light);
+        }
+        
+        .service-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-card h3 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .service-card ul {
+            list-style: none;
+        }
+        
+        .service-card ul li {
+            margin-bottom: 0.7rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+        
+        .service-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        /* Преимущества */
+        .features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+        }
+        
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        .feature p {
+            color: var(--gray);
+        }
+        
+        /* Техподдержка */
+        .support {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .support .section-title h2 {
+            color: white;
+        }
+        
+        .support p {
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Реквизиты */
+        .requisites {
+            background-color: var(--light);
+        }
+        
+        .requisites-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .requisites-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .requisite-item {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .requisite-item:last-child {
+            border-bottom: none;
+        }
+        
+        .requisite-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .requisite-item p {
+            color: var(--dark);
+        }
+        
+        /* Контакты */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo span {
+            color: var(--accent);
+        }
+        
+        .contact-info {
+            margin: 1.5rem 0;
+        }
+        
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность для планшетов */
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .service-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .features {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .requisites-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            nav ul li {
+                margin-left: 2rem;
+            }
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 767px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .hero {
+                padding: 7rem 0 3rem;
+                min-height: auto;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .service-card {
+                padding: 1.5rem;
+            }
+            
+            .requisites-content {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Дополнительные улучшения для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .service-card {
+                padding: 1.2rem;
+            }
+            
+            .requisites-content {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-project-diagram logo-icon"></i>
+                    Алгоритм <span>Успеха</span>
+                </div>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#requisites">Реквизиты</a></li>
+                        <li><a href="#support">Поддержка</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Профессиональные решения для АСУ ТП</h1>
+                <p>Мы предоставляем полный спектр услуг по модернизации и разработке автоматизированных систем управления технологическими процессами с гарантией качества и соответствия ГОСТ</p>
+                <a href="#contact" class="btn btn-large">Связаться с нами</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+                <p>Комплексные решения для автоматизации производственных процессов</p>
+            </div>
+            <div class="service-cards">
+                <div class="service-card">
+                    <h3><i class="fas fa-sync-alt"></i> Модернизация АСУ ТП</h3>
+                    <ul>
+                        <li>Цифровизация установок</li>
+                        <li>Объединение (интеграция) установок в единую сеть</li>
+                        <li>Разработка дополнительных программных модулей</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3><i class="fas fa-laptop-code"></i> Разработка ПО для новых установок АСУ ТП</h3>
+                    <ul>
+                        <li>Разработка Технического задания на систему АСУ ТП</li>
+                        <li>Разработка SCADA систем</li>
+                        <li>Разработка HMI (человеко-машинного интерфейса)</li>
+                        <li>Разработка ПО для ПЛК</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section-title" style="margin-top: 2rem;">
+                <p><strong>На все разработки предоставляем всю необходимую документацию в соответствии с ГОСТ</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Почему выбирают нас</h2>
+                <p>Мы обеспечиваем надежные и эффективные решения для вашего бизнеса</p>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+                    <h3>Профессионализм</h3>
+                    <p>Опытные специалисты с глубокими знаниями в области АСУ ТП и промышленной автоматизации</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-file-contract"></i></div>
+                    <h3>Соответствие ГОСТ</h3>
+                    <p>Вся документация разрабатывается в строгом соответствии с требованиями ГОСТ и отраслевых стандартов</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Комплексный подход</h3>
+                    <p>Предлагаем полный цикл услуг от проектирования и разработки до внедрения и сопровождения</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Реквизиты -->
+    <section id="requisites" class="requisites">
+        <div class="container">
+            <div class="section-title">
+                <h2>Реквизиты компании</h2>
+                <p>Официальная информация о компании</p>
+            </div>
+            <div class="requisites-content">
+                <div class="requisites-grid">
+                    <div class="requisite-item">
+                        <h3>Наименование компании</h3>
+                        <p>Алгоритм Успеха</p>
+                    </div>
+                    <div class="requisite-item">
+                        <h3>Сфера деятельности</h3>
+                        <p>Разработка и модернизация АСУ ТП</p>
+                    </div>
+                    <div class="requisite-item">
+                        <h3>Регион деятельности</h3>
+                        <p>Москва и Московская область</p>
+                    </div>
+                    <div class="requisite-item">
+                        <h3>Специализация</h3>
+                        <p>Промышленная автоматизация и SCADA системы</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Техподдержка -->
+    <section id="support" class="support">
+        <div class="container">
+            <div class="section-title">
+                <h2>Техническая поддержка 24/7</h2>
+            </div>
+            <p>Наши специалисты оказывают круглосуточную техническую поддержку для обеспечения бесперебойной работы ваших систем в любое время суток</p>
+            <a href="#contact" class="btn">Получить консультацию</a>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Свяжитесь с нами</h2>
+                <p>Оставьте заявку, и наши специалисты свяжутся с вами в ближайшее время</p>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" class="form-control" placeholder="Опишите вашу задачу..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Алгоритм <span>Успеха</span></div>
+                <p>Профессиональные решения для АСУ ТП</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> +7 (XXX) XXX-XX-XX</p>
+                    <p><i class="fas fa-envelope"></i> info@example.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Москва</p>
+                </div>
+                <div class="copyright">
+                    &copy; 2023 "Алгоритм Успеха". Все права защищены.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            
+            // Анимация иконки гамбургера
+            const spans = menuToggle.querySelectorAll('span');
+            if (mainNav.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                const spans = menuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+        
+        // Плавная прокрутка к якорям
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Обработка формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+        
+        // Закрытие меню при прокрутке
+        window.addEventListener('scroll', function() {
+            if (mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                const spans = menuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
