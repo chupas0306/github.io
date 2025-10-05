@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Алгоритм Успеха - Разработка и модернизация АСУ ТП</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a3a6c'/><path d='M30 30 L70 30 L70 70 L30 70 Z' fill='none' stroke='%2338b2ac' stroke-width='8'/><path d='M40 40 L60 40 L60 60 L40 60 Z' fill='none' stroke='%2338b2ac' stroke-width='4'/></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Базовые стили */
@@ -41,6 +42,17 @@
             padding: 0 15px;
         }
         
+        /* Страницы */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
         /* Шапка */
         header {
             background-color: var(--primary);
@@ -64,6 +76,7 @@
             font-weight: 700;
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
         
         .logo span {
@@ -106,21 +119,23 @@
             font-weight: 500;
             transition: color 0.3s;
             font-size: 0.95rem;
+            cursor: pointer;
         }
         
-        nav ul li a:hover {
+        nav ul li a:hover,
+        nav ul li a.active {
             color: var(--accent);
         }
         
         /* Главный баннер */
         .hero {
-            background: linear-gradient(rgba(26, 58, 108, 0.85), rgba(26, 58, 108, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a3a6c"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%232c5282" stroke-width="1"/></svg>');
+            background: linear-gradient(rgba(26, 58, 108, 0.85), rgba(26, 58, 108, 0.9));
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 8rem 0 4rem;
+            padding: 6rem 0 4rem;
             text-align: center;
-            min-height: 100vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
         }
@@ -286,6 +301,52 @@
             color: var(--gray);
         }
         
+        /* Референсы */
+        .references {
+            background-color: var(--light);
+        }
+        
+        .references-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .references-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .references-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .references-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .references-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .project-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .project-description {
+            color: var(--dark);
+            line-height: 1.5;
+        }
+        
         /* Техподдержка */
         .support {
             background-color: var(--primary);
@@ -423,6 +484,39 @@
             font-size: 0.9rem;
         }
         
+        /* Хлебные крошки */
+        .breadcrumb {
+            background-color: var(--light);
+            padding: 1rem 0;
+            margin-top: 70px;
+        }
+        
+        .breadcrumb-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--accent);
+        }
+        
+        .breadcrumb span {
+            margin: 0 0.5rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb .current {
+            color: var(--dark);
+        }
+        
         /* Адаптивность для планшетов */
         @media (min-width: 768px) {
             .hero h1 {
@@ -484,7 +578,7 @@
             }
             
             .hero {
-                padding: 7rem 0 3rem;
+                padding: 5rem 0 3rem;
                 min-height: auto;
             }
             
@@ -506,6 +600,16 @@
             
             .service-card {
                 padding: 1.5rem;
+            }
+            
+            .references-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .references-table th,
+            .references-table td {
+                padding: 0.8rem;
             }
             
             .requisites-content {
@@ -533,6 +637,12 @@
                 padding: 1.2rem;
             }
             
+            .references-table th,
+            .references-table td {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+            
             .requisites-content {
                 padding: 1.2rem;
             }
@@ -544,7 +654,7 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <div class="logo" onclick="showPage('home')">
                     <i class="fas fa-project-diagram logo-icon"></i>
                     Алгоритм <span>Успеха</span>
                 </div>
@@ -555,160 +665,546 @@
                 </div>
                 <nav id="mainNav">
                     <ul>
-                        <li><a href="#services">Услуги</a></li>
-                        <li><a href="#about">О нас</a></li>
-                        <li><a href="#requisites">Реквизиты</a></li>
-                        <li><a href="#support">Поддержка</a></li>
-                        <li><a href="#contact">Контакты</a></li>
+                        <li><a onclick="showPage('home')" class="active">Главная</a></li>
+                        <li><a onclick="showPage('services')">Услуги</a></li>
+                        <li><a onclick="showPage('about')">О нас</a></li>
+                        <li><a onclick="showPage('references')">Референсы</a></li>
+                        <li><a onclick="showPage('requisites')">Реквизиты</a></li>
+                        <li><a onclick="showPage('support')">Поддержка</a></li>
+                        <li><a onclick="showPage('contact')">Контакты</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- Главный баннер -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Профессиональная разработка программного обеспечения для АСУ ТП</h1>
-                <p>Мы предоставляем полный спектр услуг по разработке программного обеспечения автоматизированных систем управления технологическими процессами с гарантией качества и соответствия ГОСТ</p>
-                <a href="#contact" class="btn btn-large">Связаться с нами</a>
+    <!-- Главная страница -->
+    <div id="home" class="page active">
+        <!-- Главный баннер -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Профессиональная разработка программного обеспечения для АСУ ТП</h1>
+                    <p>Мы предоставляем полный спектр услуг по разработке программного обеспечения автоматизированных систем управления технологическими процессами с гарантией качества и соответствия ГОСТ</p>
+                    <a onclick="showPage('contact')" class="btn btn-large">Связаться с нами</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Услуги -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Наши услуги</h2>
-                <p>Комплексные решения для автоматизации производственных процессов</p>
-            </div>
-            <div class="service-cards">
-                <div class="service-card">
-                    <h3><i class="fas fa-sync-alt"></i> Модернизация АСУ ТП</h3>
-                    <ul>
-                        <li>Цифровизация установок</li>
-                        <li>Объединение (интеграция) установок в единую сеть</li>
-                        <li>Разработка дополнительных программных модулей</li>
-                    </ul>
+        <!-- Услуги -->
+        <section class="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Наши услуги</h2>
+                    <p>Комплексные решения для автоматизации производственных процессов</p>
                 </div>
-                <div class="service-card">
-                    <h3><i class="fas fa-laptop-code"></i> Разработка ПО для новых установок АСУ ТП</h3>
-                    <ul>
-                        <li>Разработка Технического задания на систему АСУ ТП</li>
-                        <li>Разработка SCADA систем</li>
-                        <li>Разработка HMI (человеко-машинного интерфейса)</li>
-                        <li>Разработка ПО для ПЛК</li>
-<li>Внедрение АСУ ТП в ERP, MES</li>
-
-                    </ul>
-                </div>
-            </div>
-            <div class="section-title" style="margin-top: 2rem;">
-                <p><strong>На все разработки предоставляем всю необходимую документацию в соответствии с ГОСТ</strong></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Преимущества -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>Почему выбрать нас</h2>
-                <p>Мы обеспечиваем надежные и эффективные решения для вашего бизнеса и полностью сопровождаем проект 24/7</p>
-            </div>
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
-                    <h3>Профессионализм</h3>
-                    <p>Опытные специалисты с глубокими знаниями в области АСУ ТП и промышленной автоматизации</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-file-contract"></i></div>
-                    <h3>Соответствие ГОСТ</h3>
-                    <p>Вся документация разрабатывается в строгом соответствии с требованиями ГОСТ и отраслевых стандартов</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Комплексный подход</h3>
-                    <p>Предлагаем полный цикл услуг от проектирования и разработки до внедрения и сопровождения</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Реквизиты -->
-    <section id="requisites" class="requisites">
-        <div class="container">
-            <div class="section-title">
-                <h2>Реквизиты компании</h2>
-                <p>Официальная информация о компании</p>
-            </div>
-            <div class="requisites-content">
-                <div class="requisites-grid">
-                    <div class="requisite-item">
-                        <h3>Наименование компании</h3>
-                        <p>Алгоритм Успеха</p>
+                <div class="service-cards">
+                    <div class="service-card">
+                        <h3><i class="fas fa-sync-alt"></i> Модернизация АСУ ТП</h3>
+                        <ul>
+                            <li>Цифровизация установок</li>
+                            <li>Объединение (интеграция) установок в единую сеть</li>
+                            <li>Разработка дополнительных программных модулей</li>
+                        </ul>
                     </div>
-                    <div class="requisite-item">
-                        <h3>Сфера деятельности</h3>
-                        <p>Разработка и модернизация АСУ ТП</p>
+                    <div class="service-card">
+                        <h3><i class="fas fa-laptop-code"></i> Разработка ПО для новых установок АСУ ТП</h3>
+                        <ul>
+                            <li>Разработка Технического задания на систему АСУ ТП</li>
+                            <li>Разработка SCADA систем</li>
+                            <li>Разработка HMI (человеко-машинного интерфейса)</li>
+                            <li>Разработка ПО для ПЛК</li>
+                            <li>Внедрение АСУ ТП в ERP, MES</li>
+                        </ul>
                     </div>
-                    <div class="requisite-item">
-                        <h3>Регион деятельности</h3>
-                        <p>РФ</p>
+                </div>
+                <div class="section-title" style="margin-top: 2rem;">
+                    <p><strong>На все разработки предоставляем всю необходимую документацию в соответствии с ГОСТ</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section>
+            <div class="container">
+                <div class="section-title">
+                    <h2>Почему выбрать нас</h2>
+                    <p>Мы обеспечиваем надежные и эффективные решения для вашего бизнеса и полностью сопровождаем проект 24/7</p>
+                </div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+                        <h3>Профессионализм</h3>
+                        <p>Опытные специалисты с глубокими знаниями в области АСУ ТП и промышленной автоматизации</p>
                     </div>
-                    <div class="requisite-item">
-                        <h3>Специализация</h3>
-                        <p>Промышленная автоматизация и SCADA системы</p>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-file-contract"></i></div>
+                        <h3>Соответствие ГОСТ</h3>
+                        <p>Вся документация разрабатывается в строгом соответствии с требованиями ГОСТ и отраслевых стандартов</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>Комплексный подход</h3>
+                        <p>Предлагаем полный цикл услуг от проектирования и разработки до внедрения и сопровождения</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Техподдержка -->
-    <section id="support" class="support">
-        <div class="container">
-            <div class="section-title">
-                <h2>Техническая поддержка 24/7</h2>
+    <!-- Страница услуг -->
+    <div id="services" class="page">
+        <!-- Хлебные крошки -->
+        <section class="breadcrumb">
+            <div class="container">
+                <div class="breadcrumb-content">
+                    <a onclick="showPage('home')">Главная</a>
+                    <span>/</span>
+                    <span class="current">Услуги</span>
+                </div>
             </div>
-            <p>Наши специалисты оказывают круглосуточную техническую поддержку для обеспечения бесперебойной работы ваших систем в любое время суток</p>
-            <a href="#contact" class="btn">Получить консультацию</a>
-        </div>
-    </section>
+        </section>
 
-    <!-- Контакты -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Свяжитесь с нами</h2>
-                <p>Оставьте заявку, и наши специалисты свяжутся с вами в ближайшее время</p>
+        <!-- Услуги -->
+        <section class="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Наши услуги</h2>
+                    <p>Комплексные решения для автоматизации производственных процессов</p>
+                </div>
+                <div class="service-cards">
+                    <div class="service-card">
+                        <h3><i class="fas fa-sync-alt"></i> Модернизация АСУ ТП</h3>
+                        <ul>
+                            <li>Цифровизация установок</li>
+                            <li>Объединение (интеграция) установок в единую сеть</li>
+                            <li>Разработка дополнительных программных модулей</li>
+                            <li>Обновление устаревшего оборудования и ПО</li>
+                            <li>Миграция данных и конфигураций</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <h3><i class="fas fa-laptop-code"></i> Разработка ПО для новых установок АСУ ТП</h3>
+                        <ul>
+                            <li>Разработка Технического задания на систему АСУ ТП</li>
+                            <li>Разработка SCADA систем</li>
+                            <li>Разработка HMI (человеко-машинного интерфейса)</li>
+                            <li>Разработка ПО для ПЛК</li>
+                            <li>Внедрение АСУ ТП в ERP, MES</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <h3><i class="fas fa-cogs"></i> Интеграционные решения</h3>
+                        <ul>
+                            <li>Интеграция разнородных систем управления</li>
+                            <li>Создание единых центров мониторинга</li>
+                            <li>Разработка шлюзов для обмена данными</li>
+                            <li>Реализация протоколов обмена данными</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <h3><i class="fas fa-file-alt"></i> Документация и сопровождение</h3>
+                        <ul>
+                            <li>Разработка проектной документации по ГОСТ</li>
+                            <li>Создание руководств по эксплуатации</li>
+                            <li>Техническое обучение персонала</li>
+                            <li>Гарантийное и постгарантийное обслуживание</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Ваше имя</label>
-                        <input type="text" id="name" class="form-control" required>
+        </section>
+
+        <!-- Процесс работы -->
+        <section>
+            <div class="container">
+                <div class="section-title">
+                    <h2>Процесс работы</h2>
+                    <p>Мы следуем четкой методологии для достижения оптимальных результатов</p>
+                </div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <h3>Анализ и проектирование</h3>
+                        <p>Тщательное изучение требований и создание детального технического задания</p>
                     </div>
-                    <div class="form-group">
-                        <label for="phone">Телефон</label>
-                        <input type="tel" id="phone" class="form-control" required>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-code"></i></div>
+                        <h3>Разработка</h3>
+                        <p>Создание программного обеспечения с использованием современных технологий</p>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control" required>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-vial"></i></div>
+                        <h3>Тестирование</h3>
+                        <p>Комплексное тестирование на всех этапах разработки для обеспечения качества</p>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Сообщение</label>
-                        <textarea id="message" class="form-control" placeholder="Опишите вашу задачу..."></textarea>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Внедрение</h3>
+                        <p>Установка и настройка системы на объекте заказчика с обучением персонала</p>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
-                </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
+    <!-- Страница о нас -->
+    <div id="about" class="page">
+        <!-- Хлебные крошки -->
+        <section class="breadcrumb">
+            <div class="container">
+                <div class="breadcrumb-content">
+                    <a onclick="showPage('home')">Главная</a>
+                    <span>/</span>
+                    <span class="current">О компании</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- О компании -->
+        <section>
+            <div class="container">
+                <div class="section-title">
+                    <h2>О компании</h2>
+                    <p>Профессиональные решения в области автоматизации технологических процессов</p>
+                </div>
+                <div class="service-cards">
+                    <div class="service-card">
+                        <h3><i class="fas fa-bullseye"></i> Наша миссия</h3>
+                        <p>Мы помогаем промышленным предприятиям повышать эффективность производства за счет внедрения современных систем автоматизации, обеспечивая надежность, безопасность и соответствие всем стандартам качества.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3><i class="fas fa-eye"></i> Наше видение</h3>
+                        <p>Стать ведущим поставщиком решений для АСУ ТП в России, известным своими инновационными подходами, высоким качеством услуг и долгосрочными партнерскими отношениями с клиентами.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ценности -->
+        <section class="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Наши ценности</h2>
+                    <p>Принципы, которые лежат в основе нашей работы</p>
+                </div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-medal"></i></div>
+                        <h3>Качество</h3>
+                        <p>Мы гарантируем высокое качество всех разрабатываемых решений и строгое соответствие требованиям ГОСТ</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                        <h3>Надежность</h3>
+                        <p>Наши системы работают стабильно и безотказно даже в самых сложных производственных условиях</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Инновации</h3>
+                        <p>Мы постоянно изучаем и внедряем новые технологии для повышения эффективности решений</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                        <h3>Партнерство</h3>
+                        <p>Мы выстраиваем долгосрочные отношения с клиентами, основанные на взаимном доверии и понимании</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Страница референсов -->
+    <div id="references" class="page">
+        <!-- Хлебные крошки -->
+        <section class="breadcrumb">
+            <div class="container">
+                <div class="breadcrumb-content">
+                    <a onclick="showPage('home')">Главная</a>
+                    <span>/</span>
+                    <span class="current">Референсы</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Референсы -->
+        <section class="references">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Наши референсы</h2>
+                    <p>Реализованные проекты и успешные кейсы</p>
+                </div>
+                
+                <div class="service-cards">
+                    <div class="service-card">
+                        <h3><i class="fas fa-bolt"></i> Система управления электрическим приводом</h3>
+                        <p><strong>Задача:</strong> Разработка системы управления для электрического привода, состоящего из 2-х двигателей мощностью 375 кВт каждый.</p>
+                        <p><strong>Решение:</strong> Создана комплексная система управления на базе ПЛК Siemens с разработкой SCADA-системы.</p>
+                        <p><strong>Результат:</strong> Повышение точности управления, снижение энергопотребления на 15%.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3><i class="fas fa-network-wired"></i> Объединение установок различных производителей</h3>
+                        <p><strong>Задача:</strong> Интеграция оборудования разных производителей в единую систему управления.</p>
+                        <p><strong>Решение:</strong> Разработан шлюз для преобразования протоколов, создана единая SCADA-система.</p>
+                        <p><strong>Результат:</strong> Снижение времени на переналадку оборудования на 40%.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3><i class="fas fa-industry"></i> Модернизация системы управления производственной линией</h3>
+                        <p><strong>Задача:</strong> Замена устаревшей системы управления на современную.</p>
+                        <p><strong>Решение:</strong> Разработана новая система на базе ПЛК с миграцией всех конфигураций.</p>
+                        <p><strong>Результат:</strong> Снижение количества аварийных остановок на 60%.</p>
+                    </div>
+                </div>
+                
+                <div class="section-title" style="margin-top: 3rem;">
+                    <h2>Статистика проектов</h2>
+                </div>
+                
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-project-diagram"></i></div>
+                        <h3>25+</h3>
+                        <p>Реализованных проектов</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-industry"></i></div>
+                        <h3>8</h3>
+                        <p>Отраслей промышленности</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                        <h3>15+</h3>
+                        <p>Лет опыта</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <h3>100%</h3>
+                        <p>Успешных проектов</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Страница реквизитов -->
+    <div id="requisites" class="page">
+        <!-- Хлебные крошки -->
+        <section class="breadcrumb">
+            <div class="container">
+                <div class="breadcrumb-content">
+                    <a onclick="showPage('home')">Главная</a>
+                    <span>/</span>
+                    <span class="current">Реквизиты</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Реквизиты -->
+        <section class="requisites">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Реквизиты компании</h2>
+                    <p>Юридическая информация и банковские реквизиты</p>
+                </div>
+                
+                <div class="requisites-content">
+                    <div class="requisites-grid">
+                        <div class="requisite-item">
+                            <h3>Наименование</h3>
+                            <p>Индивидуальный предприниматель Куранов Виталий Анатольевич</p>
+                        </div>
+                        
+                        <div class="requisite-item">
+                            <h3>Сокращенное наименование</h3>
+                            <p>ИП Куранов В.А. "Алгоритм Успеха"</p>
+                        </div>
+                        
+                        <div class="requisite-item">
+                            <h3>Юридический адрес</h3>
+                            <p>г. Санкт-Петербург</p>
+                        </div>
+                        
+                        <div class="requisite-item">
+                            <h3>ИНН</h3>
+                            <p>на регистрации до 09.10.25</p>
+                        </div>
+                        
+                        <div class="requisite-item">
+                            <h3>ОГРНИП</h3>
+                            <p>на регистрации до 09.10.2025г.</p>
+                        </div>
+                        
+                        <div class="requisite-item">
+                            <h3>Расчетный счет</h3>
+                            <p>Открытие 10.10.2025 г.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Страница поддержки -->
+    <div id="support" class="page">
+        <!-- Хлебные крошки -->
+        <section class="breadcrumb">
+            <div class="container">
+                <div class="breadcrumb-content">
+                    <a onclick="showPage('home')">Главная</a>
+                    <span>/</span>
+                    <span class="current">Техническая поддержка</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Поддержка -->
+        <section class="support">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Техническая поддержка 24/7</h2>
+                    <p>Мы обеспечиваем круглосуточную поддержку для бесперебойной работы ваших систем</p>
+                </div>
+                
+                <div class="service-cards">
+                    <div class="service-card">
+                        <h3><i class="fas fa-headset"></i> Экстренная поддержка</h3>
+                        <ul>
+                            <li>Круглосуточная телефонная линия</li>
+                            <li>Экстренный выезд на объект</li>
+                            <li>Удаленная диагностика и решение проблем</li>
+                            <li>Восстановление работоспособности систем</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3><i class="fas fa-tools"></i> Плановое обслуживание</h3>
+                        <ul>
+                            <li>Профилактические осмотры</li>
+                            <li>Обновление программного обеспечения</li>
+                            <li>Резервное копирование данных</li>
+                            <li>Проверка систем безопасности</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты для поддержки -->
+        <section class="support">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Контакты службы поддержки</h2>
+                </div>
+                
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-phone"></i></div>
+                        <h3>Телефон поддержки</h3>
+                        <p>+7 (981) 966-45-78</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Круглосуточно</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-envelope"></i></div>
+                        <h3>Email поддержки</h3>
+                        <p>vitali.kuranov@yandex.ru</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Ответ в течение 2 часов</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                        <h3>Время реакции</h3>
+                        <p>Критические сбои: до 30 минут</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Обычные запросы: до 24 часов</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Страница контактов -->
+    <div id="contact" class="page">
+        <!-- Хлебные крошки -->
+        <section class="breadcrumb">
+            <div class="container">
+                <div class="breadcrumb-content">
+                    <a onclick="showPage('home')">Главная</a>
+                    <span>/</span>
+                    <span class="current">Контакты</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section>
+            <div class="container">
+                <div class="section-title">
+                    <h2>Свяжитесь с нами</h2>
+                    <p>Готовы обсудить ваш проект или ответить на любые вопросы</p>
+                </div>
+                
+                <div class="service-cards">
+                    <div class="service-card">
+                        <h3><i class="fas fa-map-marker-alt"></i> Адрес</h3>
+                        <p>г. Санкт-Петербург</p>
+                        <p>Работаем по всей России и странам СНГ</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3><i class="fas fa-phone"></i> Телефон</h3>
+                        <p>+7 (981) 966-45-78</p>
+                        <p>Круглосуточная линия для экстренных случаев</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3><i class="fas fa-envelope"></i> Email</h3>
+                        <p>vitali.kuranov@yandex.ru</p>
+                        <p>Ответ в течение 2 часов в рабочее время</p>
+                    </div>
+                </div>
+                
+                <div class="section-title" style="margin-top: 3rem;">
+                    <h2>Форма обратной связи</h2>
+                    <p>Заполните форму ниже, и мы свяжемся с вами в ближайшее время</p>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя *</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Компания</label>
+                            <input type="text" id="company" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Телефон *</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Сообщение *</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        
+                        <div class="form-group" style="text-align: center;">
+                            <button type="submit" class="btn btn-large">Отправить сообщение</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- Подвал -->
     <footer>
@@ -722,72 +1218,95 @@
                     <p><i class="fas fa-map-marker-alt"></i> г. Санкт-Петербург</p>
                 </div>
                 <div class="copyright">
-                    &copy; 2025 "Алгоритм Успеха". Все права защищены.
+                    &copy; 2025 ИП Куранов В.А. "Алгоритм Успеха". Все права защищены.
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
+        // Функция переключения страниц
+        function showPage(pageId) {
+            // Скрыть все страницы
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Показать выбранную страницу
+            document.getElementById(pageId).classList.add('active');
+            
+            // Обновить активную ссылку в меню
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick') === `showPage('${pageId}')`) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Закрыть мобильное меню
+            if (window.innerWidth <= 767) {
+                const mainNav = document.getElementById('mainNav');
+                const menuToggle = document.getElementById('menuToggle');
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    const spans = menuToggle.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            }
+            
+            // Прокрутить к верху страницы
+            window.scrollTo(0, 0);
+        }
+        
         // Мобильное меню
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
         
-        menuToggle.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            
-            // Анимация иконки гамбургера
-            const spans = menuToggle.querySelectorAll('span');
-            if (mainNav.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        });
-        
-        // Закрытие меню при клике на ссылку
-        document.querySelectorAll('#mainNav a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                
+                // Анимация иконки гамбургера
                 const spans = menuToggle.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            });
-        });
-        
-        // Плавная прокрутка к якорям
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                if (mainNav.classList.contains('active')) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
                 }
             });
-        });
+        }
         
         // Обработка формы
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
+            
+            // Простая валидация
+            const name = document.getElementById('name');
+            const phone = document.getElementById('phone');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+            
+            if (!name.value || !phone.value || !email.value || !message.value) {
+                alert('Пожалуйста, заполните все обязательные поля');
+                return;
+            }
+            
+            // Здесь должна быть отправка формы на сервер
+            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
             this.reset();
         });
         
         // Закрытие меню при прокрутке
         window.addEventListener('scroll', function() {
-            if (mainNav.classList.contains('active')) {
+            if (mainNav && mainNav.classList.contains('active')) {
                 mainNav.classList.remove('active');
                 const spans = menuToggle.querySelectorAll('span');
                 spans[0].style.transform = 'none';
