@@ -181,6 +181,18 @@
             padding: 1rem 2.2rem;
             font-size: 1.1rem;
         }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+        }
+
+        .btn-telegram {
+            background-color: #0088cc;
+        }
+
+        .btn-email {
+            background-color: #ea4335;
+        }
         
         /* Секции */
         section {
@@ -404,38 +416,43 @@
         }
         
         /* Контакты */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
+        .contact-simple {
+            text-align: center;
         }
         
-        .form-group {
+        .contact-methods {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-method {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-method:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-method .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .contact-method h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-method p {
+            color: var(--gray);
             margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.9rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--accent);
-            outline: none;
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
         }
         
         /* Подвал */
@@ -538,6 +555,10 @@
             nav ul li {
                 margin-left: 2rem;
             }
+
+            .contact-methods {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         
         /* Адаптивность для мобильных устройств */
@@ -613,6 +634,10 @@
             }
             
             .requisites-content {
+                padding: 1.5rem;
+            }
+
+            .contact-method {
                 padding: 1.5rem;
             }
         }
@@ -805,7 +830,7 @@
                     <div class="service-card">
                         <h3><i class="fas fa-file-alt"></i> Документация и сопровождение</h3>
                         <ul>
-                            <li>Разработка проектной документации по ГОСТ</li>
+                            <li>Разработка программной документации по ГОСТ</li>
                             <li>Создание руководств по эксплуатации</li>
                             <li>Техническое обучение персонала</li>
                             <li>Гарантийное и постгарантийное обслуживание</li>
@@ -940,21 +965,21 @@
                         <h3><i class="fas fa-bolt"></i> Система управления электрическим приводом</h3>
                         <p><strong>Задача:</strong> Разработка системы управления для электрического привода, состоящего из 2-х двигателей мощностью 375 кВт каждый.</p>
                         <p><strong>Решение:</strong> Создана комплексная система управления на базе ПЛК Siemens с разработкой SCADA-системы.</p>
-                        <p><strong>Результат:</strong> Повышение точности управления, снижение энергопотребления на 15%.</p>
+                        <p><strong>Результат:</strong> Повышение надёжности оборудования.</p>
                     </div>
                     
                     <div class="service-card">
                         <h3><i class="fas fa-network-wired"></i> Объединение установок различных производителей</h3>
                         <p><strong>Задача:</strong> Интеграция оборудования разных производителей в единую систему управления.</p>
                         <p><strong>Решение:</strong> Разработан шлюз для преобразования протоколов, создана единая SCADA-система.</p>
-                        <p><strong>Результат:</strong> Снижение времени на переналадку оборудования на 40%.</p>
+                        <p><strong>Результат:</strong> Увеличение надёжности и сокращение непроизводственных простоев.</p>
                     </div>
                     
                     <div class="service-card">
-                        <h3><i class="fas fa-industry"></i> Модернизация системы управления производственной линией</h3>
-                        <p><strong>Задача:</strong> Замена устаревшей системы управления на современную.</p>
-                        <p><strong>Решение:</strong> Разработана новая система на базе ПЛК с миграцией всех конфигураций.</p>
-                        <p><strong>Результат:</strong> Снижение количества аварийных остановок на 60%.</p>
+                        <h3><i class="fas fa-industry"></i>Конвейерная линия</h3>
+                        <p><strong>Задача:</strong>Разработка программного обеспечения и SCADA системы.</p>
+                        <p><strong>Решение:</strong> Разработана новая система на базе ПЛк.</p>
+                        <p><strong>Результат:</strong> Увеличение объёмов отгрузки материалов.</p>
                     </div>
                 </div>
                 
@@ -1028,12 +1053,12 @@
                         
                         <div class="requisite-item">
                             <h3>ИНН</h3>
-                            <p>на регистрации до 09.10.25</p>
+                            <p>Регистрация до 09.10.2025г.</p>
                         </div>
                         
                         <div class="requisite-item">
                             <h3>ОГРНИП</h3>
-                            <p>на регистрации до 09.10.2025г.</p>
+                            <p>На регистрации до 09.10.25 г.</p>
                         </div>
                         
                         <div class="requisite-item">
@@ -1142,65 +1167,71 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Свяжитесь с нами</h2>
-                    <p>Готовы обсудить ваш проект или ответить на любые вопросы</p>
+                    <p>Выберите удобный способ связи для обсуждения вашего проекта</p>
                 </div>
                 
-                <div class="service-cards">
-                    <div class="service-card">
-                        <h3><i class="fas fa-map-marker-alt"></i> Адрес</h3>
-                        <p>г. Санкт-Петербург</p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Телефон</h3>
+                        <p>Позвоните нам для быстрого обсуждения вашего проекта</p>
+                        <p><strong>+7 (981) 966-45-78</strong></p>
+                        <a href="tel:+79819664578" class="btn">Позвонить</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>Напишите нам для детального обсуждения технических вопросов</p>
+                        <p><strong>vitali.kuranov@yandex.ru</strong></p>
+                        <a href="mailto:vitali.kuranov@yandex.ru?subject=Заявка с сайта Алгоритм Успеха&body=Здравствуйте! Я хочу обсудить проект." class="btn btn-email">Написать письмо</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p>Напишите в WhatsApp для быстрой связи и консультации</p>
+                        <p><strong>+7 (981) 966-45-78</strong></p>
+                        <a href="https://wa.me/79819664578?text=Здравствуйте! Я с вашего сайта Алгоритм Успеха и хочу обсудить проект." class="btn btn-whatsapp" target="_blank">Написать в WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="contact-methods" style="margin-top: 3rem;">
+                    <div class="contact-method">
+                        <div class="icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <h3>Telegram</h3>
+                        <p>Свяжитесь с нами через Telegram для оперативной связи</p>
+                        <p><strong>@vitali_kuranov</strong></p>
+                        <a href="https://t.me/vitali_kuranov" class="btn btn-telegram" target="_blank">Написать в Telegram</a>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Адрес</h3>
+                        <p>Наш юридический адрес и регион деятельности</p>
+                        <p><strong>г. Санкт-Петербург</strong></p>
                         <p>Работаем по всей России и странам СНГ</p>
                     </div>
                     
-                    <div class="service-card">
-                        <h3><i class="fas fa-phone"></i> Телефон</h3>
-                        <p>+7 (981) 966-45-78</p>
-                        <p>Круглосуточная линия для экстренных случаев</p>
+                    <div class="contact-method">
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Режим работы</h3>
+                        <p>Время когда мы доступны для связи</p>
+                        <p><strong>Пн-Пт: 9:00 - 18:00</strong></p>
+                        <p>Сб-Вс: по предварительной договоренности</p>
                     </div>
-                    
-                    <div class="service-card">
-                        <h3><i class="fas fa-envelope"></i> Email</h3>
-                        <p>vitali.kuranov@yandex.ru</p>
-                        <p>Ответ в течение 2 часов в рабочее время</p>
-                    </div>
-                </div>
-                
-                <div class="section-title" style="margin-top: 3rem;">
-                    <h2>Форма обратной связи</h2>
-                    <p>Заполните форму ниже, и мы свяжемся с вами в ближайшее время</p>
-                </div>
-                
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Ваше имя *</label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="company">Компания</label>
-                            <input type="text" id="company" class="form-control">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Телефон *</label>
-                            <input type="tel" id="phone" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Сообщение *</label>
-                            <textarea id="message" class="form-control" required></textarea>
-                        </div>
-                        
-                        <div class="form-group" style="text-align: center;">
-                            <button type="submit" class="btn btn-large">Отправить сообщение</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </section>
@@ -1284,26 +1315,6 @@
             });
         }
         
-        // Обработка формы
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Простая валидация
-            const name = document.getElementById('name');
-            const phone = document.getElementById('phone');
-            const email = document.getElementById('email');
-            const message = document.getElementById('message');
-            
-            if (!name.value || !phone.value || !email.value || !message.value) {
-                alert('Пожалуйста, заполните все обязательные поля');
-                return;
-            }
-            
-            // Здесь должна быть отправка формы на сервер
-            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
-            this.reset();
-        });
-        
         // Закрытие меню при прокрутке
         window.addEventListener('scroll', function() {
             if (mainNav && mainNav.classList.contains('active')) {
@@ -1314,6 +1325,42 @@
                 spans[2].style.transform = 'none';
             }
         });
+
+        // Показ уведомления при клике на контакты
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                padding: 15px 20px;
+                background: var(--accent);
+                color: white;
+                border-radius: 5px;
+                font-weight: 500;
+                z-index: 10000;
+                max-width: 300px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Анимация появления
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Автоматическое скрытие через 3 секунды
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
     </script>
 </body>
 </html>
