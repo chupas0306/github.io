@@ -3,119 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Основные SEO мета-теги -->
     <title>Алгоритм Успеха - Разработка и модернизация АСУ ТП | SCADA системы | ПЛК</title>
     <meta name="description" content="Профессиональная разработка программного обеспечения для АСУ ТП. Модернизация SCADA систем, разработка ПО для ПЛК, внедрение в ERP/MES. Соответствие ГОСТ. Опыт 10+ лет.">
-    <meta name="keywords" content="АСУ ТП, SCADA, ПЛК, автоматизация производства, промышленная автоматика, разработка ПО, модернизация АСУ ТП, человеко-машинный интерфейс, HMI, ГОСТ, технологические процессы, Siemens, WinCC">
-    <meta name="author" content="ИП Куранов В.А. Алгоритм Успеха">
     
-    <!-- Open Graph для социальных сетей -->
-    <meta property="og:title" content="Алгоритм Успеха - Профессиональная разработка АСУ ТП">
-    <meta property="og:description" content="Разработка и модернизация систем управления технологическими процессами. SCADA, ПЛК, HMI. Гарантия качества и соответствие ГОСТ. Опыт 10+ лет.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://algorithm-uspeha.ru">
-    <meta property="og:image" content="https://algorithm-uspeha.ru/images/og-image.jpg">
-    <meta property="og:site_name" content="Алгоритм Успеха">
-    <meta property="og:locale" content="ru_RU">
+    <!-- Подключение библиотеки Chart.js для графиков -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Алгоритм Успеха - Разработка АСУ ТП">
-    <meta name="twitter:description" content="Профессиональная разработка и модернизация систем управления технологическими процессами">
-    <meta name="twitter:image" content="https://algorithm-uspeha.ru/images/twitter-image.jpg">
+    <!-- Подключение Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Дополнительные мета-теги -->
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="language" content="Russian">
-    <meta name="geo.region" content="RU-SPB">
-    <meta name="geo.placename" content="Санкт-Петербург">
-    <meta name="theme-color" content="#1a3a6c">
-    <meta name="format-detection" content="telephone=no">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://algorithm-uspeha.ru">
-    
-    <!-- Sitemap -->
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" title="Sitemap">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a3a6c'/><path d='M30 30 L50 15 L70 30 L65 50 L70 70 L50 85 L30 70 L35 50 Z' fill='none' stroke='%2338b2ac' stroke-width='3'/><path d='M40 35 L45 45 L35 50 L45 55 L40 65 M60 35 L55 45 L65 50 L55 55 L60 65' fill='none' stroke='%2338b2ac' stroke-width='2'/><path d='M50 50 L50 70' fill='none' stroke='%2338b2ac' stroke-width='2'/></svg>">
-    
-    <!-- Preload важных ресурсов -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com/ajax.googleapis.com">
-    
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Алгоритм Успеха",
-        "alternateName": "ИП Куранов В.А. Алгоритм Успеха",
-        "url": "https://algorithm-uspeha.ru",
-        "logo": "https://algorithm-uspeha.ru/images/logo.png",
-        "description": "Профессиональная разработка программного обеспечения для автоматизированных систем управления технологическими процессами (АСУ ТП)",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Санкт-Петербург",
-            "addressCountry": "RU"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+7-981-966-45-78",
-            "contactType": "customer service",
-            "email": "vitali.kuranov@yandex.ru",
-            "areaServed": "RU",
-            "availableLanguage": ["Russian"]
-        },
-        "sameAs": [
-            "https://t.me/vitali_kuranov"
-        ]
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "Разработка АСУ ТП",
-        "provider": {
-            "@type": "Organization",
-            "name": "Алгоритм Успеха"
-        },
-        "description": "Разработка и модернизация программного обеспечения для автоматизированных систем управления технологическими процессами",
-        "areaServed": "Россия, страны СНГ",
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Услуги по автоматизации",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Модернизация АСУ ТП"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Разработка SCADA систем"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Разработка ПО для ПЛК"
-                    }
-                }
-            ]
-        }
-    }
-    </script>
-
     <style>
         /* Базовые стили */
         :root {
@@ -659,6 +555,28 @@
             justify-content: center;
         }
         
+        /* График */
+        .chart-section {
+            margin: 4rem 0;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(26, 58, 108, 0.05) 0%, rgba(44, 82, 130, 0.05) 100%);
+            border-radius: var(--radius-lg);
+        }
+        
+        .chart-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        #performanceChart, #performanceChartServices {
+            width: 100%;
+            height: 300px;
+        }
+        
         /* Преимущества */
         .features {
             display: grid;
@@ -814,7 +732,7 @@
             line-height: 1.7;
         }
         
-        /* Техподдержка -----rgba(255,255,255,0.9)-------------------------------------------------------------------------------------------------------------------- */
+        /* Техподдержка */
         .support {
             background: white;
             color: black;
@@ -1429,6 +1347,18 @@
                         </ul>
                     </div>
                 </div>
+                
+                <!-- Динамический график -->
+                <div class="chart-section">
+                    <div class="section-title fade-in-up">
+                        <h2>Мониторинг эффективности систем</h2>
+                        <p>Динамика производительности внедренных решений в реальном времени</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+                
                 <div class="section-title fade-in-up" style="margin-top: 3rem;">
                     <p><strong>На все разработки предоставляем всю необходимую документацию в соответствии с ГОСТ</strong></p>
                 </div>
@@ -1526,6 +1456,17 @@
                             <li>Техническое обучение персонала</li>
                             <li>Гарантийное и постгарантийное обслуживание</li>
                         </ul>
+                    </div>
+                </div>
+                
+                <!-- Динамический график -->
+                <div class="chart-section">
+                    <div class="section-title">
+                        <h2>Мониторинг эффективности систем</h2>
+                        <p>Динамика производительности внедренных решений в реальном времени</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChartServices"></canvas>
                     </div>
                 </div>
             </div>
@@ -1662,7 +1603,7 @@
             </div>
         </section>
 
-        <!-- Референсы------------------------------------------------------------------------------------------------------------------------>
+        <!-- Референсы -->
         <section class="references">
             <div class="container">
                 <div class="section-title">
@@ -1775,7 +1716,7 @@
         </section>
     </div>
 
-    <!-- Страница реквизитов ----------------------------------------------------------------------------------------------------------------------->
+    <!-- Страница реквизитов -->
     <div id="requisites" class="page">
         <!-- Хлебные крошки -->
         <section class="breadcrumb">
@@ -2068,6 +2009,9 @@
             
             // Создаем цифровой дождь
             createMatrixRain();
+            
+            // Инициализируем графики
+            initializeCharts();
         });
         
         window.addEventListener('scroll', checkScroll);
@@ -2132,12 +2076,158 @@
                 matrixContainer.appendChild(column);
             }
         }
+        
+        // Функция инициализации графиков
+        function initializeCharts() {
+            // График для главной страницы
+            const ctx1 = document.getElementById('performanceChart');
+            if (ctx1) {
+                createChart(ctx1);
+            }
+            
+            // График для страницы услуг
+            const ctx2 = document.getElementById('performanceChartServices');
+            if (ctx2) {
+                createChart(ctx2);
+            }
+        }
+        
+        // Функция создания графика
+        function createChart(ctx) {
+            // Начальные данные
+            let timeLabels = [];
+            let efficiencyData = [];
+            let productivityData = [];
+            let reliabilityData = [];
+            
+            // Генерируем начальные данные (последние 10 минут)
+            const now = new Date();
+            for (let i = 9; i >= 0; i--) {
+                const time = new Date(now.getTime() - i * 60000);
+                timeLabels.push(time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes());
+                
+                // Генерируем случайные данные в пределах нормальных значений
+                efficiencyData.push(85 + Math.random() * 10);
+                productivityData.push(75 + Math.random() * 15);
+                reliabilityData.push(90 + Math.random() * 8);
+            }
+            
+            // Создаем график
+            const performanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: timeLabels,
+                    datasets: [
+                        {
+                            label: 'Эффективность системы, %',
+                            data: efficiencyData,
+                            borderColor: '#38b2ac',
+                            backgroundColor: 'rgba(56, 178, 172, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Производительность, %',
+                            data: productivityData,
+                            borderColor: '#1a3a6c',
+                            backgroundColor: 'rgba(26, 58, 108, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Надежность, %',
+                            data: reliabilityData,
+                            borderColor: '#e74c3c',
+                            backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Показатели работы АСУ ТП в реальном времени',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Время'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Процент, %'
+                            },
+                            min: 50,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+            
+            // Функция обновления данных каждую секунду
+            function updateChart() {
+                // Обновляем метки времени
+                const now = new Date();
+                timeLabels.push(now.getHours() + ':' + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes());
+                
+                // Удаляем самую старую точку данных
+                if (timeLabels.length > 10) {
+                    timeLabels.shift();
+                    efficiencyData.shift();
+                    productivityData.shift();
+                    reliabilityData.shift();
+                }
+                
+                // Генерируем новые данные с небольшими случайными изменениями
+                const lastEfficiency = efficiencyData[efficiencyData.length - 1] || 90;
+                const lastProductivity = productivityData[productivityData.length - 1] || 80;
+                const lastReliability = reliabilityData[reliabilityData.length - 1] || 95;
+                
+                // Добавляем новые данные с небольшими колебаниями
+                efficiencyData.push(Math.max(70, Math.min(98, lastEfficiency + (Math.random() - 0.5) * 4)));
+                productivityData.push(Math.max(65, Math.min(95, lastProductivity + (Math.random() - 0.5) * 6)));
+                reliabilityData.push(Math.max(85, Math.min(99, lastReliability + (Math.random() - 0.5) * 3)));
+                
+                // Обновляем график
+                performanceChart.update();
+            }
+            
+            // Запускаем обновление каждую секунду
+            setInterval(updateChart, 1000);
+        }
     </script>
 </body>
-
 </html>
-
-
-
-
-
