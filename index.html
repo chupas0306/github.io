@@ -12,8 +12,11 @@
     <!-- Подключение Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a3a6c'/><path d='M30 30 L50 15 L70 30 L65 50 L70 70 L50 85 L30 70 L35 50 Z' fill='none' stroke='%2338b2ac' stroke-width='3'/><path d='M40 35 L45 45 L35 50 L45 55 L40 65 M60 35 L55 45 L65 50 L55 55 L60 65' fill='none' stroke='%2338b2ac' stroke-width='2'/><path d='M50 50 L50 70' fill='none' stroke='%2338b2ac' stroke-width='2'/></svg>">
+    
     <style>
-        /* Базовые стили */
+        /* Все стили остаются без изменений */
         :root {
             --primary: #1a3a6c;
             --secondary: #2c5282;
@@ -57,7 +60,6 @@
             padding: 0 15px;
         }
         
-        /* Страницы */
         .page {
             display: none;
             min-height: 100vh;
@@ -74,7 +76,6 @@
             display: block;
         }
         
-        /* Шапка */
         header {
             background-color: rgba(26, 58, 108, 0.95);
             backdrop-filter: blur(15px);
@@ -139,12 +140,6 @@
             transform-origin: left;
         }
         
-        .logo-icon {
-            margin-right: 10px;
-            font-size: 1.5rem;
-        }
-
-        /* Логотип */
         .logo-symbol {
             width: 42px;
             height: 42px;
@@ -165,7 +160,6 @@
             filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
         }
         
-        /* Мобильное меню */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -239,7 +233,6 @@
             color: var(--accent-light);
         }
         
-        /* Главный баннер */
         .hero {
             background: linear-gradient(135deg, rgba(26, 58, 108, 0.92) 0%, rgba(44, 82, 130, 0.88) 100%);
             background-size: cover;
@@ -254,7 +247,6 @@
             overflow: hidden;
         }
         
-        /* Цифровой дождь */
         .matrix-rain {
             position: absolute;
             top: 0;
@@ -395,7 +387,6 @@
             box-shadow: 0 6px 20px rgba(234, 67, 53, 0.4);
         }
         
-        /* Секции */
         section {
             padding: 6rem 0;
             position: relative;
@@ -435,7 +426,6 @@
             line-height: 1.6;
         }
         
-        /* Услуги */
         .services {
             background-color: var(--lighter);
             position: relative;
@@ -555,7 +545,6 @@
             justify-content: center;
         }
         
-        /* График */
         .chart-section {
             margin: 4rem 0;
             padding: 3rem 0;
@@ -570,14 +559,21 @@
             background: white;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-wrapper {
+            width: 100%;
+            height: 300px;
+            position: relative;
         }
         
         #performanceChart, #performanceChartServices {
-            width: 100%;
-            height: 300px;
+            width: 100% !important;
+            height: 100% !important;
         }
         
-        /* Преимущества */
         .features {
             display: grid;
             grid-template-columns: 1fr;
@@ -641,7 +637,6 @@
             line-height: 1.7;
         }
         
-        /* Референсы */
         .references {
             background-color: var(--lighter);
             position: relative;
@@ -732,7 +727,6 @@
             line-height: 1.7;
         }
         
-        /* Техподдержка */
         .support {
             background: white;
             color: black;
@@ -771,7 +765,6 @@
             line-height: 1.7;
         }
         
-        /* Реквизиты */
         .requisites {
             background-color: var(--lighter);
             position: relative;
@@ -838,7 +831,6 @@
             line-height: 1.6;
         }
         
-        /* Контакты */
         .contact-simple {
             text-align: center;
         }
@@ -934,7 +926,6 @@
             margin-bottom: 2rem;
         }
         
-        /* Подвал */
         footer {
             background: var(--darker);
             color: white;
@@ -996,7 +987,6 @@
             width: 100%;
         }
         
-        /* Хлебные крошки */
         .breadcrumb {
             background-color: var(--lighter);
             padding: 2rem 0;
@@ -1049,7 +1039,6 @@
             font-weight: 600;
         }
         
-        /* Анимации */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -1065,7 +1054,6 @@
             animation: fadeInUp 0.8s ease forwards;
         }
         
-        /* Кнопка "Наверх" */
         .scroll-to-top {
             position: fixed;
             bottom: 30px;
@@ -1096,7 +1084,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
         
-        /* Адаптивность для планшетов */
         @media (min-width: 768px) {
             .hero h1 {
                 font-size: 3.5rem;
@@ -1131,7 +1118,6 @@
             }
         }
         
-        /* Адаптивность для десктопов */
         @media (min-width: 992px) {
             .features {
                 grid-template-columns: repeat(3, 1fr);
@@ -1150,7 +1136,6 @@
             }
         }
         
-        /* Адаптивность для мобильных устройств */
         @media (max-width: 767px) {
             .menu-toggle {
                 display: flex;
@@ -1230,9 +1215,29 @@
                 width: 45px;
                 height: 45px;
             }
+            
+            .chart-section {
+                margin: 2rem 0;
+                padding: 2rem 0;
+            }
+            
+            .chart-container {
+                padding: 1.5rem;
+            }
+            
+            .chart-wrapper {
+                height: 250px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title p {
+                font-size: 1rem;
+            }
         }
         
-        /* Дополнительные улучшения для очень маленьких экранов */
         @media (max-width: 480px) {
             .container {
                 width: 95%;
@@ -1262,6 +1267,25 @@
             
             .section-title h2 {
                 font-size: 1.8rem;
+            }
+            
+            .chart-wrapper {
+                height: 200px;
+            }
+            
+            .chart-container {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-height: 600px) and (orientation: landscape) {
+            .chart-wrapper {
+                height: 200px;
+            }
+            
+            .hero {
+                min-height: 100vh;
+                padding: 6rem 0 4rem;
             }
         }
     </style>
@@ -1355,7 +1379,9 @@
                         <p>Динамика производительности внедренных решений в реальном времени</p>
                     </div>
                     <div class="chart-container">
-                        <canvas id="performanceChart"></canvas>
+                        <div class="chart-wrapper">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
                     </div>
                 </div>
                 
@@ -1466,7 +1492,9 @@
                         <p>Динамика производительности внедренных решений в реальном времени</p>
                     </div>
                     <div class="chart-container">
-                        <canvas id="performanceChartServices"></canvas>
+                        <div class="chart-wrapper">
+                            <canvas id="performanceChartServices"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1660,9 +1688,6 @@
                             </div>
                         </div>
 
-
-
-                        
                         <div class="reference-card">
                             <h3><i class="fas fa-network-wired"></i> Объединение установок различных производителей</h3>
                             <div class="reference-item">
@@ -1936,21 +1961,34 @@
     </div>
 
     <script>
+        // Глобальные переменные для графиков
+        let performanceChart1 = null;
+        let performanceChart2 = null;
+        
         // Навигация между страницами
         function showPage(pageId) {
+            console.log('Переход на страницу:', pageId);
+            
             // Скрываем все страницы
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
             
             // Показываем выбранную страницу
-            document.getElementById(pageId).classList.add('active');
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
             
             // Обновляем активную ссылку в навигации
             document.querySelectorAll('nav a').forEach(link => {
                 link.classList.remove('active');
             });
-            document.querySelector(`nav a[onclick="showPage('${pageId}')"]`).classList.add('active');
+            
+            const activeLink = document.querySelector(`nav a[onclick="showPage('${pageId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
             
             // Закрываем мобильное меню, если оно открыто
             document.getElementById('mainNav').classList.remove('active');
@@ -1958,6 +1996,9 @@
             
             // Прокручиваем к началу страницы
             window.scrollTo(0, 0);
+            
+            // Обновляем графики при переключении страниц
+            setTimeout(updateChartsSize, 100);
         }
         
         // Мобильное меню
@@ -1998,6 +2039,8 @@
         
         // Добавляем классы для анимации
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM загружен');
+            
             document.querySelectorAll('.fade-in-up').forEach(element => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(40px)';
@@ -2012,7 +2055,27 @@
             
             // Инициализируем графики
             initializeCharts();
+            
+            // Обновляем размер графиков при загрузке
+            setTimeout(updateChartsSize, 500);
+            
+            // Инициализируем обработчики событий для навигации
+            initializeNavigation();
         });
+        
+        // Инициализация навигации
+        function initializeNavigation() {
+            // Обработчики для всех ссылок навигации
+            document.querySelectorAll('nav a, .breadcrumb a, .btn').forEach(element => {
+                if (element.getAttribute('onclick') && element.getAttribute('onclick').includes('showPage')) {
+                    element.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const pageId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                        showPage(pageId);
+                    });
+                }
+            });
+        }
         
         window.addEventListener('scroll', checkScroll);
         
@@ -2034,27 +2097,11 @@
             });
         });
         
-        // Плавный скролл для якорей
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
         // Функция создания цифрового дождя
         function createMatrixRain() {
             const matrixContainer = document.getElementById('matrixRain');
+            if (!matrixContainer) return;
+            
             const columns = Math.floor(window.innerWidth / 20);
             
             for (let i = 0; i < columns; i++) {
@@ -2079,21 +2126,38 @@
         
         // Функция инициализации графиков
         function initializeCharts() {
+            console.log('Инициализация графиков');
+            
             // График для главной страницы
             const ctx1 = document.getElementById('performanceChart');
             if (ctx1) {
-                createChart(ctx1);
+                performanceChart1 = createChart(ctx1, 'performanceChart1');
             }
             
             // График для страницы услуг
             const ctx2 = document.getElementById('performanceChartServices');
             if (ctx2) {
-                createChart(ctx2);
+                performanceChart2 = createChart(ctx2, 'performanceChart2');
             }
         }
         
+        // Функция обновления размеров графиков
+        function updateChartsSize() {
+            if (performanceChart1) {
+                performanceChart1.resize();
+            }
+            if (performanceChart2) {
+                performanceChart2.resize();
+            }
+        }
+        
+        // Обработчик изменения размера окна
+        window.addEventListener('resize', function() {
+            setTimeout(updateChartsSize, 300);
+        });
+        
         // Функция создания графика
-        function createChart(ctx) {
+        function createChart(ctx, chartId) {
             // Начальные данные
             let timeLabels = [];
             let efficiencyData = [];
@@ -2155,11 +2219,17 @@
                             display: true,
                             text: 'Показатели работы АСУ ТП в реальном времени',
                             font: {
-                                size: 16
+                                size: window.innerWidth < 768 ? 14 : 16
                             }
                         },
                         legend: {
                             position: 'top',
+                            labels: {
+                                boxWidth: 12,
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
+                                }
+                            }
                         },
                         tooltip: {
                             mode: 'index',
@@ -2171,22 +2241,39 @@
                             display: true,
                             title: {
                                 display: true,
-                                text: 'Время'
+                                text: 'Время',
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
+                                }
                             },
                             grid: {
                                 color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                maxTicksLimit: window.innerWidth < 768 ? 5 : 10,
+                                font: {
+                                    size: window.innerWidth < 768 ? 8 : 10
+                                }
                             }
                         },
                         y: {
                             display: true,
                             title: {
                                 display: true,
-                                text: 'Процент, %'
+                                text: 'Процент, %',
+                                font: {
+                                    size: window.innerWidth < 768 ? 10 : 12
+                                }
                             },
                             min: 50,
                             max: 100,
                             grid: {
                                 color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                font: {
+                                    size: window.innerWidth < 768 ? 8 : 10
+                                }
                             }
                         }
                     },
@@ -2227,6 +2314,8 @@
             
             // Запускаем обновление каждую секунду
             setInterval(updateChart, 1000);
+            
+            return performanceChart;
         }
     </script>
 </body>
