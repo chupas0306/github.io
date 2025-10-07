@@ -345,7 +345,7 @@
         
         /* Главный баннер */
         .hero {
-            background: linear-gradient(135deg, rgba(26, 58, 108, 0.92) 0%, rgba(44, 82, 130, 0.88) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a3a6c"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="%232c5282" stroke-width="0.5"/></svg>');
+            background: linear-gradient(135deg, rgba(26, 58, 108, 0.92) 0%, rgba(44, 82, 130, 0.88) 100%);
             background-size: cover;
             background-position: center;
             color: white;
@@ -358,15 +358,42 @@
             overflow: hidden;
         }
         
-        .hero::before {
-            content: '';
+        /* Цифровой дождь */
+        .matrix-rain {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%2338b2ac" opacity="0.2"/></svg>');
-            animation: float 25s infinite linear;
+            z-index: 0;
+            opacity: 0.3;
+        }
+        
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            color: rgba(56, 178, 172, 0.7);
+            font-size: 18px;
+            font-family: monospace;
+            text-shadow: 0 0 5px rgba(56, 178, 172, 0.5);
+            animation: matrix-fall linear infinite;
+        }
+        
+        @keyframes matrix-fall {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
         }
         
         .hero::after {
@@ -378,11 +405,6 @@
             height: 150px;
             background: linear-gradient(to top, var(--light), transparent);
             z-index: 1;
-        }
-        
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100px, -100px); }
         }
         
         .hero-content {
@@ -1284,10 +1306,6 @@
                 padding: 2.5rem 2rem;
             }
             
-            .hero::before {
-                animation: float 50s infinite linear;
-            }
-            
             .scroll-to-top {
                 bottom: 20px;
                 right: 20px;
@@ -1370,6 +1388,9 @@
     <div id="home" class="page active">
         <!-- Главный баннер -->
         <section class="hero">
+            <!-- Цифровой дождь -->
+            <div class="matrix-rain" id="matrixRain"></div>
+            
             <div class="container">
                 <div class="hero-content fade-in-up">
                     <h1>Профессиональная разработка программного обеспечения для АСУ ТП</h1>
@@ -2025,6 +2046,9 @@
             
             // Запускаем проверку при загрузке
             checkScroll();
+            
+            // Создаем цифровой дождь
+            createMatrixRain();
         });
         
         window.addEventListener('scroll', checkScroll);
@@ -2064,6 +2088,31 @@
                 }
             });
         });
+        
+        // Функция создания цифрового дождя
+        function createMatrixRain() {
+            const matrixContainer = document.getElementById('matrixRain');
+            const columns = Math.floor(window.innerWidth / 20);
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = `${i * 20}px`;
+                column.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                column.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // Создаем случайную последовательность цифр 0 и 1
+                let content = '';
+                const length = Math.floor(Math.random() * 10) + 5;
+                for (let j = 0; j < length; j++) {
+                    content += Math.random() > 0.5 ? '1' : '0';
+                    if (j < length - 1) content += '<br>';
+                }
+                
+                column.innerHTML = content;
+                matrixContainer.appendChild(column);
+            }
+        }
     </script>
 </body>
 </html>
